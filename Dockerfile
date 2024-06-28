@@ -1,5 +1,5 @@
 # Étape 1: Utiliser une image de base Maven pour construire l'application
-FROM maven:3.8.4-openjdk-21 AS build
+FROM maven:3.8.4-openjdk:21-jdk-slim AS build
 WORKDIR /app
 
 # Copier les fichiers de configuration Maven (pom.xml) pour télécharger les dépendances
