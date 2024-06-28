@@ -1,6 +1,7 @@
 services:
   - name: themesoflegends
-    buildCommand: mvn clean package
+    buildCommand: ./mvnw clean package
+
     env:
       - key: JAVA_VERSION
         value: "21"  # Version Java utilisée
