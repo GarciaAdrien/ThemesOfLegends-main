@@ -3,12 +3,17 @@ FROM openjdk:21-jdk-slim
 
 # Étape 2: Créer un répertoire de travail
 WORKDIR /app
+COPY pom.xml .
+COPY src src
 
-# Étape 3: Copier le fichier jar de votre application dans le répertoire de travail
-COPY target/themesoflegends-0.0.1-SNAPSHOT.jar app.jar
+RUN chmod +x ./mvnw
+RUN ./mvnw clean package -DskipTests
 
-# Étape 4: Exposer le port sur lequel l'application va tourner
+# Stage 2: Create the final Docker image using OpenJDK 19
+FROM openjdk:19-jdk
+VOLUME /tmp
+
+# Copy the JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-
-# Étape 5: Définir le point d'entrée pour démarrer l'application
-ENTRYPOINT ["java", "-jar", "app.jar"]
