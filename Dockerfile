@@ -1,5 +1,5 @@
 # Étape 1: Utiliser une image de base Maven pour construire l'application
-FROM maven:3.8.4-openjdk:21-jdk AS build
+FROM maven:3.8.4-openjdk-21 AS build
 WORKDIR /app
 
 # Copier les fichiers de configuration Maven (pom.xml) pour télécharger les dépendances
@@ -13,7 +13,7 @@ RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Étape 2: Utiliser une image de base OpenJDK pour exécuter l'application
-FROM openjdk:21-jdk
+FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copier le JAR construit à partir de l'étape précédente
