@@ -1,0 +1,25 @@
+services:
+  - name: themesoflegends
+    buildCommand: mvn clean package
+    env:
+      - key: JAVA_VERSION
+        value: "21"  # Version Java utilisée
+    systemPackages:
+      - openjdk-21-jdk  # Installer la version JDK OpenJDK 21 si nécessaire
+
+databases:
+  - name: postgres
+    plan: starter
+    env:
+     - key: SPRING_DATASOURCE_URL
+       value: jdbc:postgresql://dpg-cpv69v5ds78s73atm3c0-a.frankfurt-postgres.render.com:5432/tol
+     - key: SPRING_DATASOURCE_USERNAME
+       value: adrien
+     - key: SPRING_DATASOURCE_PASSWORD
+       value: 2hXYF0jTyx0SG4Pib4JJjVWHiESEfaSR
+     - key: SPRING_JPA_SHOW_SQL
+       value: "true"
+     - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+       value: update
+     - key: SPRING_DATA_REST_DEFAULT_ASSOCIATION_RELATION
+       value: "false"
